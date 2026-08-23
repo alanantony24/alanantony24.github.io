@@ -1,1 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forever Avicii | Interactive DJ Deck &amp; Memorial Tribute</title>
+    <meta
+      name="description"
+      content="A fan-made tribute page celebrating Avicii's legacy through music, story, and an interactive dual-deck DJ mixer."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="aurora" aria-hidden="true"></div>
 
+    <header class="topbar">
+      <div class="logo-lockup" aria-label="Avicii logo">
+        <img
+          class="logo-image"
+          src="https://upload.wikimedia.org/wikipedia/commons/9/95/Avicii_logo.svg"
+          alt="Avicii logo"
+          loading="eager"
+        />
+      </div>
+      <nav class="nav">
+        <a href="#story">Story</a>
+        <a href="#facts">Facts</a>
+        <a href="#wheel">DJ Deck</a>
+        <a href="#guide">Guide</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="story">
+        <div class="hero-copy">
+          <p class="tag">A tribute to Tim Bergling (1989–2018)</p>
+          <h1><span>forever avicii</span></h1>
+          <p class="intro">
+            Before anything else, Tim Bergling was a DJ and producer with
+            unmatched melodic instinct. He built records made for huge stages,
+            but always with heart. This tribute honors the decks, the songs, and
+            the legacy that still lives in every drop.
+          </p>
+          <a class="primary-cta" href="#wheel">Launch DJ Deck</a>
+        </div>
+        <figure class="hero-image">
+          <img
+            src="https://media.gettyimages.com/id/102196740/photo/stadiumred-presents-dj-avicii.jpg?s=1024x1024&w=gi&k=20&c=LySXcmSpb_5zxffdIsK_X8ZHmrXxmdUjJy03kHCeGQY="
+            alt="Avicii performing as a DJ with headphones"
+            loading="eager"
+          />
+          <figcaption>Avicii live DJ set — Getty Images / Johnny Nunez</figcaption>
+        </figure>
+      </section>
+
+      <section class="bio">
+        <h2>DJ Bio</h2>
+        <p>
+          Born in Stockholm, Tim Bergling rose from a young bedroom producer to
+          a globally defining EDM DJ. His sets and productions blended uplifting
+          melodies with festival power, helping tracks like
+          <strong>Levels</strong>, <strong>Wake Me Up</strong>, and
+          <strong>The Nights</strong> become generation-defining anthems. Though
+          he passed in 2018, his sound remains a blueprint for modern dance
+          music.
+        </p>
+      </section>
+
+      <section class="facts" id="facts">
+        <h2>DJ Legacy Highlights</h2>
+        <div class="fact-grid">
+          <article>
+            <h3>Signature Melodic House Sound</h3>
+            <p>
+              Avicii helped define melodic EDM by balancing emotional toplines
+              with powerful, crowd-ready drops.
+            </p>
+          </article>
+          <article>
+            <h3>Mainstage Era Icon</h3>
+            <p>
+              He became one of the era's most recognized festival DJs, shaping
+              the sound of global mainstage culture.
+            </p>
+          </article>
+          <article>
+            <h3>Legacy Beyond the Stage</h3>
+            <p>
+              His music still drives new producers, and his legacy continues
+              through fans, artists, and the Tim Bergling Foundation.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="wheel-section" id="wheel">
+        <div class="wheel-head">
+          <h2>Interactive Tribute DJ Deck</h2>
+          <p>
+            Mix and match Tim's iconic tracks across two virtual turntables. Use performance pads, tempo sliders, CUE drops, and SYNC beatmatching with real-time audio visualization.
+          </p>
+        </div>
+
+        <div class="deck-shell" role="group" aria-label="Tribute DJ deck tracks">
+          <div class="deck-brand" aria-hidden="true">
+            <span>PIONEER-STYLE TRIBUTE PRO MIXER</span>
+          </div>
+
+          <!-- DECK A (LEFT) -->
+          <div class="deck-player deck-left" id="deckLeft">
+            <div class="platter" title="Drag horizontally on vinyl to scratch / nudge">
+              <div class="ring ring-cyan"></div>
+              <div class="vinyl"></div>
+              <div class="center-screen" title="Deck A BPM">126.0</div>
+              <div class="spindle"></div>
+            </div>
+            <div class="deck-buttons">
+              <button type="button" class="deck-btn cue" data-action="cue" aria-label="Deck A cue: tap to jump to 0:00, hold for preview drop">
+                CUE
+              </button>
+              <button type="button" class="deck-btn play" data-action="play" aria-label="Deck A play or pause">
+                PLAY
+              </button>
+              <button type="button" class="deck-btn sync" data-action="sync" aria-label="Deck A sync tempo to deck B">
+                SYNC
+              </button>
+            </div>
+            <div class="tempo-rail" title="Pitch slider: drag up/down to adjust BPM (±8%), double-click to reset" role="slider" aria-label="Deck A pitch tempo slider" aria-valuemin="-8" aria-valuemax="8" aria-valuenow="0" tabindex="0">
+              <div class="tempo-marks" aria-hidden="true"><span>+</span><span>0</span><span>-</span></div>
+              <span></span>
+            </div>
+            <div class="player-label">DECK A</div>
+          </div>
+
+          <!-- CENTRAL MIXER -->
+          <div class="mixer">
+            <div class="mixer-top">
+              <div class="vu-meter" id="vuMeter" aria-hidden="true" title="Audio Level Meter">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <button class="random-btn" id="randomSpin" aria-label="Play random tribute track">
+                🎲 RANDOM MIX
+              </button>
+            </div>
+            <div class="channel-strips" aria-hidden="true">
+              <div class="strip" title="EQ High / Mid / Level"><span></span><span></span><span></span></div>
+              <div class="strip"><span></span><span></span><span></span></div>
+              <div class="strip"><span></span><span></span><span></span></div>
+              <div class="strip"><span></span><span></span><span></span></div>
+            </div>
+            <div class="pad-grid" role="group" aria-label="Track performance pads">
+              <button class="track deck-pad" data-track="0" aria-label="Load Levels on Deck A">
+                <span class="pad-deck-tag">DECK A</span>
+                <span class="pad-title">LEVELS</span>
+                <span class="pad-bpm">126 BPM</span>
+              </button>
+              <button class="track deck-pad" data-track="1" aria-label="Load Wake Me Up on Deck B">
+                <span class="pad-deck-tag">DECK B</span>
+                <span class="pad-title">WAKE ME UP</span>
+                <span class="pad-bpm">124 BPM</span>
+              </button>
+              <button class="track deck-pad" data-track="2" aria-label="Load The Nights on Deck A">
+                <span class="pad-deck-tag">DECK A</span>
+                <span class="pad-title">THE NIGHTS</span>
+                <span class="pad-bpm">128 BPM</span>
+              </button>
+              <button class="track deck-pad" data-track="3" aria-label="Load Waiting For Love on Deck B">
+                <span class="pad-deck-tag">DECK B</span>
+                <span class="pad-title">WAITING FOR LOVE</span>
+                <span class="pad-bpm">128 BPM</span>
+              </button>
+            </div>
+            <div class="transport">
+              <button type="button" class="transport-btn start" id="startBtn" aria-label="Start or resume all decks">
+                ▶ START
+              </button>
+              <button type="button" class="transport-btn pause" id="pauseBtn" aria-label="Pause all decks">
+                ⏸ PAUSE
+              </button>
+              <button type="button" class="transport-btn stop" id="stopBtn" aria-label="Stop all decks">
+                ⏹ STOP
+              </button>
+            </div>
+            <label class="crossfader-wrap" for="crossfader">
+              <div class="crossfader-header">
+                <span>◀ DECK A</span>
+                <span>CROSSFADER</span>
+                <span>DECK B ▶</span>
+              </div>
+              <input
+                type="range"
+                id="crossfader"
+                class="crossfader"
+                min="0"
+                max="100"
+                value="50"
+                aria-label="Crossfade blend between deck A and deck B"
+              />
+            </label>
+            <pre class="ascii-wave" id="asciiWave" aria-live="polite"></pre>
+          </div>
+
+          <!-- DECK B (RIGHT) -->
+          <div class="deck-player deck-right" id="deckRight">
+            <div class="platter" title="Drag horizontally on vinyl to scratch / nudge">
+              <div class="ring ring-green"></div>
+              <div class="vinyl"></div>
+              <div class="center-screen" title="Deck B BPM">124.0</div>
+              <div class="spindle"></div>
+            </div>
+            <div class="deck-buttons">
+              <button type="button" class="deck-btn cue" data-action="cue" aria-label="Deck B cue: tap to jump to 0:00, hold for preview drop">
+                CUE
+              </button>
+              <button type="button" class="deck-btn play" data-action="play" aria-label="Deck B play or pause">
+                PLAY
+              </button>
+              <button type="button" class="deck-btn sync" data-action="sync" aria-label="Deck B sync tempo to deck A">
+                SYNC
+              </button>
+            </div>
+            <div class="tempo-rail" title="Pitch slider: drag up/down to adjust BPM (±8%), double-click to reset" role="slider" aria-label="Deck B pitch tempo slider" aria-valuemin="-8" aria-valuemax="8" aria-valuenow="0" tabindex="0">
+              <div class="tempo-marks" aria-hidden="true"><span>+</span><span>0</span><span>-</span></div>
+              <span></span>
+            </div>
+            <div class="player-label">DECK B</div>
+          </div>
+        </div>
+
+        <p class="now-playing" id="nowPlaying">
+          Deck ready. Tap a performance pad to load a tribute snippet.
+        </p>
+
+        <!-- DETAILED INSTRUCTION MANUAL -->
+        <aside class="deck-guide" id="guide" aria-labelledby="deck-guide-title">
+          <div class="guide-header">
+            <span class="guide-badge">DJ HANDBOOK</span>
+            <h3 id="deck-guide-title">How to Use the DJ Deck &amp; Mix Like Avicii</h3>
+            <p class="guide-sub">Follow this step-by-step guide to master dual-deck mixing, beat drops, and tempo matching.</p>
+          </div>
+
+          <!-- Quick 3-Step Start -->
+          <div class="guide-steps">
+            <div class="step-card">
+              <div class="step-num">01</div>
+              <h4>Load Tracks</h4>
+              <p>Click any <strong>Performance Pad</strong> in the center mixer. Track pads light up in neon and load onto Deck A or Deck B.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-num">02</div>
+              <h4>Beatmatch with SYNC</h4>
+              <p>Hit <strong>SYNC</strong> on either deck to automatically match playback tempo, or drag the <strong>Pitch Slider</strong> up/down.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-num">03</div>
+              <h4>Crossfade &amp; Drop</h4>
+              <p>Slide the <strong>Crossfader</strong> left/right to blend both anthems smoothly. Use <strong>CUE</strong> for on-beat drops.</p>
+            </div>
+          </div>
+
+          <!-- Controls Breakdown Grid -->
+          <div class="guide-grid">
+            <div class="guide-item">
+              <dt><span class="guide-icon">🎛️</span> Performance Pads</dt>
+              <dd>
+                Instant track selectors. <strong>Deck A (Left)</strong> routes <em>Levels</em> &amp; <em>The Nights</em>. <strong>Deck B (Right)</strong> routes <em>Wake Me Up</em> &amp; <em>Waiting For Love</em>. Tapping an already playing pad acts as a <strong>Hot Cue</strong> re-triggering from 0:00.
+              </dd>
+            </div>
+            <div class="guide-item">
+              <dt><span class="guide-icon">▶️</span> PLAY / PAUSE</dt>
+              <dd>
+                Starts or pauses playback on that specific deck. When playing, the vinyl turntable spins and the center screen displays real-time BPM.
+              </dd>
+            </div>
+            <div class="guide-item">
+              <dt><span class="guide-icon">⏸️</span> CUE Button</dt>
+              <dd>
+                <strong>Quick Tap:</strong> Instantly jumps back to the beginning (0:00) and pauses at the cue point.<br />
+                <strong>Hold Down:</strong> Plays a live preview drop while held; releasing stops and snaps right back to 0:00.
+              </dd>
+            </div>
+            <div class="guide-item">
+              <dt><span class="guide-icon">⚡</span> SYNC</dt>
+              <dd>
+                Locks the deck's BPM and playback rate to the other loaded deck for perfectly beatmatched dual playback. Tap again to restore native track tempo.
+              </dd>
+            </div>
+            <div class="guide-item">
+              <dt><span class="guide-icon">🎚️</span> Pitch / Tempo Rail (±8%)</dt>
+              <dd>
+                Drag the slider knob up (+) to speed up or down (-) to slow down the deck tempo. <strong>Double-click</strong> the rail to snap back to center (0%).
+              </dd>
+            </div>
+            <div class="guide-item">
+              <dt><span class="guide-icon">💿</span> Platter Scratch / Nudge</dt>
+              <dd>
+                Click and drag left or right across the vinyl record platter while a track is playing to scratch or nudge playback timing forward/backward.
+              </dd>
+            </div>
+            <div class="guide-item">
+              <dt><span class="guide-icon">🎚️</span> Crossfader</dt>
+              <dd>
+                Equal-power audio fader. Position in center (50%) to play both decks together for a mashup, slide 100% Left for Deck A only, or 100% Right for Deck B only.
+              </dd>
+            </div>
+            <div class="guide-item">
+              <dt><span class="guide-icon">⏹️</span> Master Transport (START / PAUSE / STOP)</dt>
+              <dd>
+                <strong>START:</strong> Resumes all loaded decks at once.<br />
+                <strong>PAUSE:</strong> Freezes all decks without resetting position.<br />
+                <strong>STOP:</strong> Unloads both decks and resets the visualizer.
+              </dd>
+            </div>
+          </div>
+
+          <!-- Pro Tip Box -->
+          <div class="guide-protip">
+            <span class="protip-badge">PRO DJ TIP</span>
+            <p>
+              To create an iconic Avicii festival blend: Load <strong>Levels</strong> on Deck A and <strong>Wake Me Up</strong> on Deck B. Set the Crossfader to center, hit <strong>SYNC</strong> on Deck B to lock them at 126 BPM, and experience both anthems harmonizing simultaneously!
+            </p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <p class="footer-memorial">
+        Forever in our hearts • Tim Bergling (1989–2018)
+      </p>
+      <p class="footer-disclaimer">
+        Fan-made memorial tribute page. Audio hooks on this deck are played from user-supplied licensed snippets for tribute and educational demonstration.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

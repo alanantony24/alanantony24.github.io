@@ -1,0 +1,24 @@
+# IDE and Editor configurations
+.agent/
+.agents/
+.claude/
+.codex/
+.cursor/
+.gemini/
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node / package manager (if used)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs and temp files
+*.log
+scratch/
