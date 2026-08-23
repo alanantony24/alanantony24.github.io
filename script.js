@@ -770,19 +770,58 @@ trackButtons.forEach((button) => {
   });
 });
 
-// Random Mix button
-if (randomSpin) {
-  randomSpin.addEventListener("click", async () => {
-    const index = Math.floor(Math.random() * tracks.length);
-    const key = deckKeyForTrack(index);
-    try {
-      await playDeckTrack(key, index, trackButtons[index]);
-      nowPlaying.textContent = `🎲 Random mix loaded: ${tracks[index].title} on ${deckLabel(key)}!`;
-    } catch (error) {
-      nowPlaying.textContent = "Random mix failed. Tap a pad to try again.";
-      console.error(error);
+// Auto Mashup: mixes 2 songs together (Deck A + Deck B) with auto beatmatching
+async function autoMixDecks() {
+  try {
+    await ensureAudio();
+
+    // Pick 1 track for Deck A (0: Levels, 2: The Nights)
+    const deckATracks = [0, 2];
+    let aIndex = deckATracks[Math.floor(Math.random() * deckATracks.length)];
+    if (decks.left.trackIndex !== null && decks.left.trackIndex === aIndex) {
+      aIndex = deckATracks.find((i) => i !== decks.left.trackIndex) ?? aIndex;
     }
-  });
+
+    // Pick 1 track for Deck B (1: Wake Me Up, 3: Waiting For Love)
+    const deckBTracks = [1, 3];
+    let bIndex = deckBTracks[Math.floor(Math.random() * deckBTracks.length)];
+    if (decks.right.trackIndex !== null && decks.right.trackIndex === bIndex) {
+      bIndex = deckBTracks.find((i) => i !== decks.right.trackIndex) ?? bIndex;
+    }
+
+    const trackA = tracks[aIndex];
+    const trackB = tracks[bIndex];
+
+    // Smoothly center the crossfader (50%) so both tracks blend equally
+    if (crossfader) {
+      crossfader.value = "50";
+      applyCrossfade();
+    }
+
+    // Reset pitch faders to neutral (0%)
+    decks.left.pitchPercent = 0;
+    if (decks.left.tempoKnob) decks.left.tempoKnob.style.top = "50%";
+    decks.right.pitchPercent = 0;
+    if (decks.right.tempoKnob) decks.right.tempoKnob.style.top = "50%";
+
+    // Concurrently load and start playback on both decks
+    await Promise.all([
+      playDeckTrack("left", aIndex, trackButtons[aIndex]),
+      playDeckTrack("right", bIndex, trackButtons[bIndex]),
+    ]);
+
+    // Automatically sync Deck B tempo to Deck A for harmonic beatmatching
+    applySync("right");
+
+    nowPlaying.textContent = `🔥 Live Auto-Mashup: ${trackA.title} (Deck A) + ${trackB.title} (Deck B) beatmatched & synced at ${trackBpm(aIndex).toFixed(1)} BPM!`;
+  } catch (error) {
+    nowPlaying.textContent = "Auto mashup failed to start. Tap any pad to activate audio.";
+    console.error(error);
+  }
+}
+
+if (randomSpin) {
+  randomSpin.addEventListener("click", autoMixDecks);
 }
 
 // Transport buttons
