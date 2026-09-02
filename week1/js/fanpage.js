@@ -14,7 +14,7 @@ const tracks = [
   {
     title: "Levels",
     line: "Mainstage pulse.",
-    src: "audio/Avicii - Levels - Avicii (128k).mp3",
+    src: "assets/audio/Avicii - Levels - Avicii (128k).mp3",
     color: "#58f4ff",
     bpm: 126,
     deck: "left",
@@ -22,7 +22,7 @@ const tracks = [
   {
     title: "Wake Me Up",
     line: "Folk-meets-EDM lift.",
-    src: "audio/Avicii - Wake Me Up (Official Video) - Avicii (128k).mp3",
+    src: "assets/audio/Avicii - Wake Me Up (Official Video) - Avicii (128k).mp3",
     color: "#ffd26f",
     bpm: 124,
     deck: "right",
@@ -30,7 +30,7 @@ const tracks = [
   {
     title: "The Nights",
     line: "Anthem energy.",
-    src: "audio/Avicii - The Nights - Avicii (128k).mp3",
+    src: "assets/audio/Avicii - The Nights - Avicii (128k).mp3",
     color: "#7dffad",
     bpm: 128,
     deck: "left",
@@ -38,7 +38,7 @@ const tracks = [
   {
     title: "Waiting For Love",
     line: "Driving melodic tension.",
-    src: "audio/Avicii - Waiting For Love - Avicii (128k).mp3",
+    src: "assets/audio/Avicii - Waiting For Love - Avicii (128k).mp3",
     color: "#ff8be1",
     bpm: 128,
     deck: "right",
@@ -158,7 +158,10 @@ function applyDeckPlaybackRate(deck) {
       baseRate = trackBpm(partner.trackIndex) / trackBpm(deck.trackIndex);
     }
   }
-  const effectiveRate = Math.max(0.5, Math.min(2.0, baseRate * (1 + deck.pitchPercent / 100)));
+  const effectiveRate = Math.max(
+    0.5,
+    Math.min(2.0, baseRate * (1 + deck.pitchPercent / 100)),
+  );
   deck.audio.playbackRate = effectiveRate;
   updateDeckBpmDisplay(deck);
 }
@@ -201,7 +204,7 @@ function updatePadVisuals() {
 
 function updateWavePausedState() {
   const anyPaused = Object.values(decks).some(
-    (deck) => deck.trackIndex !== null && !deck.isPlaying
+    (deck) => deck.trackIndex !== null && !deck.isPlaying,
   );
   asciiWave.classList.toggle("is-paused", anyPaused);
 }
@@ -209,11 +212,12 @@ function updateWavePausedState() {
 function updateNowPlaying() {
   const playing = Object.values(decks).filter((deck) => deck.isPlaying);
   const paused = Object.values(decks).filter(
-    (deck) => deck.trackIndex !== null && !deck.isPlaying
+    (deck) => deck.trackIndex !== null && !deck.isPlaying,
   );
 
   if (playing.length === 0 && paused.length === 0) {
-    nowPlaying.textContent = "Deck ready. Tap a performance pad to load a tribute snippet.";
+    nowPlaying.textContent =
+      "Deck ready. Tap a performance pad to load a tribute snippet.";
     updatePadVisuals();
     updateWavePausedState();
     return;
@@ -225,8 +229,13 @@ function updateNowPlaying() {
     const track = tracks[deck.trackIndex];
     const pos = deck.audio ? formatTime(deck.audio.currentTime) : "0:00";
     const syncTag = deck.isSynced ? " [SYNC]" : "";
-    const pitchTag = deck.pitchPercent !== 0 ? ` (${deck.pitchPercent > 0 ? "+" : ""}${deck.pitchPercent.toFixed(1)}%)` : "";
-    parts.push(`▶ ${deckLabel(deck.key)}: ${track.title} (${pos}) · ${getEffectiveBpm(deck).toFixed(1)} BPM${syncTag}${pitchTag}`);
+    const pitchTag =
+      deck.pitchPercent !== 0
+        ? ` (${deck.pitchPercent > 0 ? "+" : ""}${deck.pitchPercent.toFixed(1)}%)`
+        : "";
+    parts.push(
+      `▶ ${deckLabel(deck.key)}: ${track.title} (${pos}) · ${getEffectiveBpm(deck).toFixed(1)} BPM${syncTag}${pitchTag}`,
+    );
   });
 
   paused.forEach((deck) => {
@@ -244,7 +253,7 @@ function buildWaveFrame(intensities) {
   const rows = 12;
   const charset = " .:-=+*#%@";
   const heights = intensities.map((value) =>
-    Math.max(1, Math.floor((value / 255) * rows))
+    Math.max(1, Math.floor((value / 255) * rows)),
   );
   const lines = [];
 
@@ -254,7 +263,7 @@ function buildWaveFrame(intensities) {
       if (height >= row) {
         const charIndex = Math.min(
           charset.length - 1,
-          Math.floor((height / rows) * (charset.length - 1))
+          Math.floor((height / rows) * (charset.length - 1)),
         );
         line += charset[charIndex];
       } else {
@@ -338,17 +347,27 @@ function startAnimationLoop() {
   const draw = () => {
     const leftSample = sampleAnalyser(decks.left.analyser, columns);
     const rightSample = sampleAnalyser(decks.right.analyser, columns);
-    const leftLevel = leftSample.reduce((sum, value) => sum + value, 0) / (255 * columns);
-    const rightLevel = rightSample.reduce((sum, value) => sum + value, 0) / (255 * columns);
+    const leftLevel =
+      leftSample.reduce((sum, value) => sum + value, 0) / (255 * columns);
+    const rightLevel =
+      rightSample.reduce((sum, value) => sum + value, 0) / (255 * columns);
 
     const mixed = leftSample.map((value, index) =>
-      Math.max(value, rightSample[index] || 0)
+      Math.max(value, rightSample[index] || 0),
     );
 
     // Pick dominant track color or active color
-    if (decks.left.isPlaying && !decks.right.isPlaying && decks.left.trackIndex !== null) {
+    if (
+      decks.left.isPlaying &&
+      !decks.right.isPlaying &&
+      decks.left.trackIndex !== null
+    ) {
       activeWaveColor = tracks[decks.left.trackIndex].color;
-    } else if (decks.right.isPlaying && !decks.left.isPlaying && decks.right.trackIndex !== null) {
+    } else if (
+      decks.right.isPlaying &&
+      !decks.left.isPlaying &&
+      decks.right.trackIndex !== null
+    ) {
       activeWaveColor = tracks[decks.right.trackIndex].color;
     }
 
@@ -449,7 +468,9 @@ function stopDeck(key) {
   resetDeckVisuals(deck);
 
   if (!Object.values(decks).some((item) => item.isPlaying)) {
-    const anyLoaded = Object.values(decks).some((item) => item.trackIndex !== null);
+    const anyLoaded = Object.values(decks).some(
+      (item) => item.trackIndex !== null,
+    );
     stopAnimationLoop(!anyLoaded);
   }
   updateNowPlaying();
@@ -555,7 +576,8 @@ async function playDeckTrack(key, trackIndex, padButton) {
     startAnimationLoop();
   } catch (error) {
     stopDeck(key);
-    nowPlaying.textContent = "Playback blocked by browser. Tap a pad again to activate audio.";
+    nowPlaying.textContent =
+      "Playback blocked by browser. Tap a pad again to activate audio.";
     console.error(error);
   }
 }
@@ -622,7 +644,8 @@ function stopAllDecks() {
   stopDeck("left");
   stopDeck("right");
   renderIdleWave();
-  nowPlaying.textContent = "⏹ All decks stopped and unloaded. Tap any pad to load a track.";
+  nowPlaying.textContent =
+    "⏹ All decks stopped and unloaded. Tap any pad to load a track.";
 }
 
 async function startAllDecks() {
@@ -663,14 +686,20 @@ function setupTempoFaders() {
       const isHorizontal = rect.width > rect.height;
       let normalized;
       if (isHorizontal) {
-        normalized = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        normalized = Math.max(
+          0,
+          Math.min(1, (clientX - rect.left) / rect.width),
+        );
         // Left = -8%, Right = +8%
         const pitch = (normalized - 0.5) * 16;
         deck.pitchPercent = Math.round(pitch * 10) / 10;
         deck.tempoKnob.style.left = `${normalized * 100}%`;
         deck.tempoKnob.style.top = "50%";
       } else {
-        normalized = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
+        normalized = Math.max(
+          0,
+          Math.min(1, (clientY - rect.top) / rect.height),
+        );
         // Top = +8%, Bottom = -8%
         const pitch = (0.5 - normalized) * 16;
         deck.pitchPercent = Math.round(pitch * 10) / 10;
@@ -698,18 +727,26 @@ function setupTempoFaders() {
     });
 
     // Touch support for mobile / tablets
-    deck.tempoRail.addEventListener("touchstart", (e) => {
-      if (e.touches.length > 0) {
-        isDragging = true;
-        updateFaderFromEvent(e.touches[0].clientX, e.touches[0].clientY);
-      }
-    }, { passive: true });
+    deck.tempoRail.addEventListener(
+      "touchstart",
+      (e) => {
+        if (e.touches.length > 0) {
+          isDragging = true;
+          updateFaderFromEvent(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      },
+      { passive: true },
+    );
 
-    window.addEventListener("touchmove", (e) => {
-      if (isDragging && e.touches.length > 0) {
-        updateFaderFromEvent(e.touches[0].clientX, e.touches[0].clientY);
-      }
-    }, { passive: true });
+    window.addEventListener(
+      "touchmove",
+      (e) => {
+        if (isDragging && e.touches.length > 0) {
+          updateFaderFromEvent(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      },
+      { passive: true },
+    );
 
     window.addEventListener("touchend", () => {
       isDragging = false;
@@ -746,7 +783,13 @@ function setupPlatterNudge() {
       startX = e.clientX;
       // Nudge playback time by delta
       const nudgeSeconds = deltaX * 0.05;
-      deck.audio.currentTime = Math.max(0, Math.min(deck.audio.duration || 300, deck.audio.currentTime + nudgeSeconds));
+      deck.audio.currentTime = Math.max(
+        0,
+        Math.min(
+          deck.audio.duration || 300,
+          deck.audio.currentTime + nudgeSeconds,
+        ),
+      );
       updateNowPlaying();
     });
 
@@ -764,7 +807,8 @@ trackButtons.forEach((button) => {
     try {
       await playDeckTrack(key, index, button);
     } catch (error) {
-      nowPlaying.textContent = "Could not start playback. Tap pad again to activate.";
+      nowPlaying.textContent =
+        "Could not start playback. Tap pad again to activate.";
       console.error(error);
     }
   });
@@ -815,7 +859,8 @@ async function autoMixDecks() {
 
     nowPlaying.textContent = `🔥 Live Auto-Mashup: ${trackA.title} (Deck A) + ${trackB.title} (Deck B) beatmatched & synced at ${trackBpm(aIndex).toFixed(1)} BPM!`;
   } catch (error) {
-    nowPlaying.textContent = "Auto mashup failed to start. Tap any pad to activate audio.";
+    nowPlaying.textContent =
+      "Auto mashup failed to start. Tap any pad to activate audio.";
     console.error(error);
   }
 }
