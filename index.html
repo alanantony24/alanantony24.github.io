@@ -3,48 +3,317 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alan Antony | Portfolio</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        background: linear-gradient(135deg, #0f172a, #1d4ed8);
-        color: white;
-      }
-      .card {
-        background: rgba(15, 23, 42, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 18px;
-        padding: 2rem 2.5rem;
-        text-align: center;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-      }
-      h1 {
-        margin-top: 0;
-        font-size: clamp(2rem, 5vw, 3rem);
-      }
-      p {
-        margin-bottom: 1.5rem;
-        color: #dbeafe;
-      }
-      a {
-        display: inline-block;
-        background: white;
-        color: #0f172a;
-        padding: 0.8rem 1.2rem;
-        border-radius: 999px;
-        text-decoration: none;
-        font-weight: 700;
-      }
-    </style>
+    <title>Alan Antony James | Portfolio</title>
+    <meta
+      name="description"
+      content="Windows XP-inspired portfolio for Alan Antony James, student at SMU."
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
-    <div class="card">
-      <h1>Alan Antony</h1>
-      <p>Personal portfolio and WAD2 coursework site.</p>
+    <div class="xp-desktop" aria-label="Alan Antony James portfolio desktop">
+      <div class="boot-screen" id="bootScreen" aria-live="polite">
+        <div class="boot-panel">
+          <div class="boot-logo">Microsoft</div>
+          <div class="boot-title">Windows XP</div>
+          <div class="boot-progress" aria-label="startup progress">
+            <span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="desktop-icons" aria-label="Desktop shortcuts">
+        <button
+          class="folder-button active"
+          data-window="homeWindow"
+          type="button"
+        >
+          <span class="folder-icon" aria-hidden="true"></span>
+          <span class="folder-label">Home</span>
+        </button>
+        <button
+          class="folder-button"
+          data-window="projectsWindow"
+          type="button"
+        >
+          <span class="folder-icon" aria-hidden="true"></span>
+          <span class="folder-label">Projects</span>
+        </button>
+        <button class="folder-button" data-window="hobbiesWindow" type="button">
+          <span class="folder-icon" aria-hidden="true"></span>
+          <span class="folder-label">Hobbies</span>
+        </button>
+      </div>
+
+      <section class="window active" id="homeWindow" aria-label="Home section">
+        <header class="titlebar">
+          <div class="titlebar-text">Home - Alan Antony James</div>
+          <div class="window-controls" aria-label="window controls">
+            <button type="button" aria-label="minimize window">_</button>
+            <button type="button" aria-label="maximize window">□</button>
+            <button type="button" aria-label="close window">×</button>
+          </div>
+        </header>
+
+        <div class="window-content home-window-content">
+          <div class="intro-copy">
+            <p class="eyebrow">Student at SMU</p>
+            <h1>Alan Antony James</h1>
+            <p class="lead">
+              I build interfaces, tinker with ideas, and spend a lot of time
+              turning rough concepts into something people actually enjoy using.
+            </p>
+
+            <div class="info-row">
+              <div>
+                <span class="label">Focus</span>
+                <strong>Design + Code</strong>
+              </div>
+              <div>
+                <span class="label">Current</span>
+                <strong>SMU Student</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="avatar-panel">
+            <pre
+              class="ascii-avatar"
+              aria-label="ASCII avatar of a man with glasses"
+            >
+            .-"""-.
+           /  o o  \\
+           |  .-.  |
+           |  | |  |
+           |  `-`  |
+           |  _ _  |
+          /|  \_/  |\\
+          \|  ___  |/
+            /| | |\\
+           /_|_|_|\\
+             / \ 
+             \_/ 
+            </pre>
+            <p class="avatar-tag">still making things work</p>
+          </div>
+        </div>
+
+        <div class="ascii-scene" aria-label="ASCII landscape art">
+          <pre>
+                 .-"""-.              .-"""-.
+            .-"       "-.        .-"       "-.
+           /  .-. .-.  \\______/  .-. .-.  \\
+          /  /   Y   \\______/  /   Y   \\
+          |  \  _   _  |    |  \  _   _  |
+           \  `-(_) -'  |    |  `-(_) -' /
+            `-.______.-'      `-.______.-'
+                /|  |\\            /|  |\\
+               /_|__|_\\          /_|__|_|\
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre
+          >
+        </div>
+      </section>
+
+      <section class="window" id="projectsWindow" aria-label="Projects section">
+        <header class="titlebar">
+          <div class="titlebar-text">Projects - Alan Antony James</div>
+          <div class="window-controls" aria-label="window controls">
+            <button type="button" aria-label="minimize window">_</button>
+            <button type="button" aria-label="maximize window">□</button>
+            <button type="button" aria-label="close window">×</button>
+          </div>
+        </header>
+
+        <div class="window-content projects-window-content">
+          <div class="section-heading">
+            <p class="eyebrow">Selected work</p>
+            <h2>Projects</h2>
+          </div>
+
+          <div class="carousel" aria-live="polite">
+            <button
+              class="carousel-nav prev"
+              type="button"
+              aria-label="Previous project"
+            >
+              ‹
+            </button>
+
+            <div class="carousel-track">
+              <article class="project-slide is-active">
+                <div class="project-visual visual-one">
+                  <span>Placeholder</span>
+                </div>
+                <div class="project-copy">
+                  <h3>Campus Connect</h3>
+                  <p>
+                    A student-focused platform concept for keeping events,
+                    notes, and group projects in one place.
+                  </p>
+                </div>
+              </article>
+
+              <article class="project-slide">
+                <div class="project-visual visual-two">
+                  <span>Placeholder</span>
+                </div>
+                <div class="project-copy">
+                  <h3>Flux Studio</h3>
+                  <p>
+                    A visual design workflow prototype exploring clean layouts,
+                    motion, and quick content publishing.
+                  </p>
+                </div>
+              </article>
+
+              <article class="project-slide">
+                <div class="project-visual visual-three">
+                  <span>Placeholder</span>
+                </div>
+                <div class="project-copy">
+                  <h3>After Hours</h3>
+                  <p>
+                    An experimental social space for side projects, notes, and
+                    playful product ideas built during late-night sessions.
+                  </p>
+                </div>
+              </article>
+            </div>
+
+            <button
+              class="carousel-nav next"
+              type="button"
+              aria-label="Next project"
+            >
+              ›
+            </button>
+          </div>
+
+          <div class="carousel-dots" aria-label="Project selection">
+            <button
+              class="dot is-active"
+              type="button"
+              aria-label="Show project 1"
+            ></button>
+            <button
+              class="dot"
+              type="button"
+              aria-label="Show project 2"
+            ></button>
+            <button
+              class="dot"
+              type="button"
+              aria-label="Show project 3"
+            ></button>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="window"
+        id="hobbiesWindow"
+        aria-label="Hobbies and interests section"
+      >
+        <header class="titlebar">
+          <div class="titlebar-text">Hobbies - Alan Antony James</div>
+          <div class="window-controls" aria-label="window controls">
+            <button type="button" aria-label="minimize window">_</button>
+            <button type="button" aria-label="maximize window">□</button>
+            <button type="button" aria-label="close window">×</button>
+          </div>
+        </header>
+
+        <div class="window-content hobbies-window-content">
+          <div class="section-heading">
+            <p class="eyebrow">Life outside the screen</p>
+            <h2>Hobbies &amp; Interests</h2>
+          </div>
+
+          <div class="hobby-grid">
+            <article class="hobby-card">
+              <span class="hobby-icon">✎</span>
+              <h3>Sketching</h3>
+              <p>
+                Quick character studies, concept doodles, and visual notes from
+                the week.
+              </p>
+            </article>
+
+            <article class="hobby-card">
+              <span class="hobby-icon">☕</span>
+              <h3>Coffee &amp; Thinking</h3>
+              <p>
+                Slow mornings, brainstorms, and the kind of ideas that only
+                appear after a warm drink.
+              </p>
+            </article>
+
+            <article class="hobby-card">
+              <span class="hobby-icon">🎧</span>
+              <h3>Music</h3>
+              <p>
+                Lo-fi sessions, indie playlists, and soundtracks for deep work
+                and long walks.
+              </p>
+            </article>
+
+            <article class="hobby-card">
+              <span class="hobby-icon">🚲</span>
+              <h3>Rides &amp; Walks</h3>
+              <p>
+                Resetting the headspace with movement, fresh air, and the
+                occasional detour.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <footer class="taskbar" aria-label="Windows taskbar">
+        <button class="start-button" type="button" aria-label="Open start menu">
+          <span class="start-logo">◢</span>
+          <span>Start</span>
+        </button>
+
+        <div class="task-buttons" aria-label="Open windows">
+          <button
+            class="task-button is-active"
+            data-window="homeWindow"
+            type="button"
+          >
+            Home
+          </button>
+          <button
+            class="task-button"
+            data-window="projectsWindow"
+            type="button"
+          >
+            Projects
+          </button>
+          <button class="task-button" data-window="hobbiesWindow" type="button">
+            Hobbies
+          </button>
+        </div>
+
+        <div class="system-tray">
+          <span class="tray-clock" id="clock">--:--</span>
+        </div>
+      </footer>
+
+      <nav class="start-menu hidden" aria-label="Start menu">
+        <button class="menu-item" data-window="homeWindow" type="button">
+          Home
+        </button>
+        <button class="menu-item" data-window="projectsWindow" type="button">
+          Projects
+        </button>
+        <button class="menu-item" data-window="hobbiesWindow" type="button">
+          Hobbies
+        </button>
+      </nav>
     </div>
+
+    <script src="assets/js/script.js"></script>
   </body>
 </html>
