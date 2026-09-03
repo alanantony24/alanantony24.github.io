@@ -6,23 +6,31 @@
     <title>Alan Antony James | Portfolio</title>
     <meta
       name="description"
-      content="Windows XP-inspired portfolio for Alan Antony James, student at SMU."
+      content="Interactive Windows XP-inspired portfolio for Alan Antony James, software & interface engineering student at SMU."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
     <div class="xp-desktop" aria-label="Alan Antony James portfolio desktop">
+      <!-- Boot sequence -->
       <div class="boot-screen" id="bootScreen" aria-live="polite">
         <div class="boot-panel">
           <div class="boot-logo">Microsoft</div>
           <div class="boot-title">Windows XP</div>
-          <div class="boot-progress" aria-label="startup progress">
+          <div class="boot-progress" aria-label="Startup loading bar">
             <span></span>
           </div>
         </div>
       </div>
 
-      <div class="desktop-icons" aria-label="Desktop shortcuts">
+      <!-- Desktop Shortcuts -->
+      <nav class="desktop-icons" aria-label="Desktop shortcuts">
         <button
           class="folder-button active"
           data-window="homeWindow"
@@ -39,96 +47,138 @@
           <span class="folder-icon" aria-hidden="true"></span>
           <span class="folder-label">Projects</span>
         </button>
-        <button class="folder-button" data-window="hobbiesWindow" type="button">
+        <button
+          class="folder-button"
+          data-window="hobbiesWindow"
+          type="button"
+        >
           <span class="folder-icon" aria-hidden="true"></span>
           <span class="folder-label">Hobbies</span>
         </button>
-      </div>
+        <a
+          class="folder-button desktop-link"
+          href="fanpage/index.html"
+          target="_blank"
+          rel="noopener"
+          title="Open WAD2 DJ Deck Fanpage in new tab"
+        >
+          <span class="folder-icon folder-wad" aria-hidden="true"></span>
+          <span class="folder-label">WAD2 Fanpage ↗</span>
+        </a>
+      </nav>
 
-      <section class="window active" id="homeWindow" aria-label="Home section">
+      <!-- Window: Home -->
+      <section class="window active" id="homeWindow" aria-label="Home window">
         <header class="titlebar">
-          <div class="titlebar-text">Home - Alan Antony James</div>
-          <div class="window-controls" aria-label="window controls">
-            <button type="button" aria-label="minimize window">_</button>
-            <button type="button" aria-label="maximize window">□</button>
-            <button type="button" aria-label="close window">×</button>
+          <div class="titlebar-info">
+            <span class="titlebar-icon" aria-hidden="true"></span>
+            <span class="titlebar-text">Alan Antony James - System Overview</span>
+          </div>
+          <div class="window-controls" aria-label="Window controls">
+            <button type="button" class="win-btn win-min" data-action="minimize" aria-label="Minimize window">_</button>
+            <button type="button" class="win-btn win-max" data-action="maximize" aria-label="Maximize window">□</button>
+            <button type="button" class="win-btn win-close" data-action="close" aria-label="Close window">×</button>
           </div>
         </header>
 
         <div class="window-content home-window-content">
           <div class="intro-copy">
-            <p class="eyebrow">Student at SMU</p>
+            <p class="role-badge">Frontend &amp; Interface Engineer · SMU Student</p>
             <h1>Alan Antony James</h1>
             <p class="lead">
-              I build interfaces, tinker with ideas, and spend a lot of time
-              turning rough concepts into something people actually enjoy using.
+              I build web interfaces, tinker with creative systems, and obsess over turning rough product concepts into resilient software people genuinely love using.
             </p>
 
             <div class="info-row">
-              <div>
-                <span class="label">Focus</span>
-                <strong>Design + Code</strong>
+              <div class="info-card">
+                <span class="info-label">Focus</span>
+                <strong class="info-val">UI/UX Design + Frontend Eng</strong>
               </div>
-              <div>
-                <span class="label">Current</span>
-                <strong>SMU Student</strong>
+              <div class="info-card">
+                <span class="info-label">Education</span>
+                <strong class="info-val">Singapore Management University</strong>
+              </div>
+              <div class="info-card">
+                <span class="info-label">Current Module</span>
+                <strong class="info-val">Web Application Development 2</strong>
+              </div>
+              <div class="info-card">
+                <span class="info-label">Location</span>
+                <strong class="info-val">Singapore</strong>
               </div>
             </div>
           </div>
 
           <div class="avatar-panel">
-            <pre
-              class="ascii-avatar"
-              aria-label="ASCII avatar of a man with glasses"
-            >
-            .-"""-.
-           /  o o  \\
-           |  .-.  |
-           |  | |  |
-           |  `-`  |
-           |  _ _  |
-          /|  \_/  |\\
-          \|  ___  |/
-            /| | |\\
-           /_|_|_|\\
-             / \ 
-             \_/ 
-            </pre>
-            <p class="avatar-tag">still making things work</p>
+            <div class="avatar-frame">
+              <pre
+                class="ascii-avatar"
+                aria-label="ASCII portrait of Alan Antony James with glasses"
+              >
+     .------------------.
+    /    .-""""""""-.    \
+   |    /  .------.  \    |
+   |   |  / _    _ \  |   |
+  [#]  | [ (o)  (o) ] |  [#]
+   |   |     ||       |   |
+   |    \   \==/     /    |
+    \    '----------'    /
+    /`------------------'\
+   / /|  ALAN ANTONY   |\ \
+  /_/ |   SMU // WAD   | \_\</pre>
+            </div>
+            <div class="avatar-status">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span class="avatar-tag">alan.exe · running active</span>
+            </div>
           </div>
         </div>
 
-        <div class="ascii-scene" aria-label="ASCII landscape art">
-          <pre>
-                 .-"""-.              .-"""-.
-            .-"       "-.        .-"       "-.
-           /  .-. .-.  \\______/  .-. .-.  \\
-          /  /   Y   \\______/  /   Y   \\
-          |  \  _   _  |    |  \  _   _  |
-           \  `-(_) -'  |    |  `-(_) -' /
-            `-.______.-'      `-.______.-'
-                /|  |\\            /|  |\\
-               /_|__|_\\          /_|__|_|\
-             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</pre
-          >
+        <div class="ascii-scene" aria-label="ASCII Windows XP Bliss landscape">
+          <div class="ascii-scene-header">
+            <span>C:\WINDOWS\system32\bliss_landscape.art</span>
+            <span class="ascii-dim">[VT100 ANSI Monospace]</span>
+          </div>
+          <div class="ascii-scene-frame">
+            <pre>
+<span class="ascii-sun">           \   |   /</span>               <span class="ascii-cloud">_ . - = - . _</span>
+<span class="ascii-sun">         '.  .---.  .'</span>           <span class="ascii-cloud">(               )</span>
+<span class="ascii-sun">        -=  (  *  )  =-</span>        <span class="ascii-cloud">(     ☁  BLISS     )</span>
+<span class="ascii-sun">         .'  '---'  .'</span>          <span class="ascii-cloud">( _ . - = - . _ )</span>
+<span class="ascii-sun">           /   |   \</span>
+                                     <span class="ascii-cloud">_ . - = - . _</span>
+               <span class="ascii-hill">.---.</span>              <span class="ascii-cloud">(               )</span>
+             <span class="ascii-hill">/       \</span>          <span class="ascii-cloud">(   WINDOWS XP     )</span>
+            <span class="ascii-hill">|  HILL   |</span>          <span class="ascii-cloud">( _ . - = - . _ )</span>
+        <span class="ascii-hill">.--'           '--.</span>
+       <span class="ascii-hill">/                   \</span>                     <span class="ascii-hill">_.-""""-._</span>
+     <span class="ascii-hill">.'                     '.</span>                 <span class="ascii-hill">.'          '.</span>
+   <span class="ascii-hill">.'                         '.</span>             <span class="ascii-hill">.'              '.</span>
+  <span class="ascii-hill">/     ~ ~ ~ ~ ~ ~ ~ ~ ~       \</span>           <span class="ascii-hill">/   ~ ~ ~ ~ ~ ~    \</span>
+ <span class="ascii-hill">/       SMU // PORTFOLIO        \_________/     ALAN ANTONY    \</span>
+<span class="ascii-ground">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></pre>
+          </div>
         </div>
       </section>
 
-      <section class="window" id="projectsWindow" aria-label="Projects section">
+      <!-- Window: Projects -->
+      <section class="window" id="projectsWindow" aria-label="Projects window">
         <header class="titlebar">
-          <div class="titlebar-text">Projects - Alan Antony James</div>
-          <div class="window-controls" aria-label="window controls">
-            <button type="button" aria-label="minimize window">_</button>
-            <button type="button" aria-label="maximize window">□</button>
-            <button type="button" aria-label="close window">×</button>
+          <div class="titlebar-info">
+            <span class="titlebar-icon" aria-hidden="true"></span>
+            <span class="titlebar-text">Selected Projects - Alan Antony James</span>
+          </div>
+          <div class="window-controls" aria-label="Window controls">
+            <button type="button" class="win-btn win-min" data-action="minimize" aria-label="Minimize window">_</button>
+            <button type="button" class="win-btn win-max" data-action="maximize" aria-label="Maximize window">□</button>
+            <button type="button" class="win-btn win-close" data-action="close" aria-label="Close window">×</button>
           </div>
         </header>
 
         <div class="window-content projects-window-content">
           <div class="section-heading">
-            <p class="eyebrow">Selected work</p>
-            <h2>Projects</h2>
+            <h2>Featured Projects</h2>
+            <p class="section-desc">Interactive web applications, design systems, and coursework builds.</p>
           </div>
 
           <div class="carousel" aria-live="polite">
@@ -141,42 +191,111 @@
             </button>
 
             <div class="carousel-track">
+              <!-- Slide 1: Campus Connect -->
               <article class="project-slide is-active">
-                <div class="project-visual visual-one">
-                  <span>Placeholder</span>
+                <div class="project-visual">
+                  <img
+                    src="assets/images/campus-connect.jpg"
+                    alt="Campus Connect student collaboration platform UI"
+                    class="project-image"
+                    loading="eager"
+                  />
+                  <div class="project-badge">Student Platform</div>
                 </div>
                 <div class="project-copy">
+                  <div class="project-num">Project 01 / 04</div>
                   <h3>Campus Connect</h3>
                   <p>
-                    A student-focused platform concept for keeping events,
-                    notes, and group projects in one place.
+                    A centralized student ecosystem concept unifying class schedules, study group threads, course files, and upcoming university events in a clean modern interface.
                   </p>
+                  <div class="project-tags">
+                    <span>Web App</span>
+                    <span>Collaboration</span>
+                    <span>UI/UX</span>
+                    <span>Dashboard</span>
+                  </div>
                 </div>
               </article>
 
+              <!-- Slide 2: Flux Studio -->
               <article class="project-slide">
-                <div class="project-visual visual-two">
-                  <span>Placeholder</span>
+                <div class="project-visual">
+                  <img
+                    src="assets/images/flux-studio.jpg"
+                    alt="Flux Studio visual design and motion editor UI"
+                    class="project-image"
+                    loading="lazy"
+                  />
+                  <div class="project-badge">Creative Tool</div>
                 </div>
                 <div class="project-copy">
+                  <div class="project-num">Project 02 / 04</div>
                   <h3>Flux Studio</h3>
                   <p>
-                    A visual design workflow prototype exploring clean layouts,
-                    motion, and quick content publishing.
+                    A high-performance visual design and motion editor prototype featuring multi-layer vector canvases, timeline keyframing, and swift asset publishing.
                   </p>
+                  <div class="project-tags">
+                    <span>Creative Suite</span>
+                    <span>Motion Timeline</span>
+                    <span>Dark Mode</span>
+                    <span>Canvas API</span>
+                  </div>
                 </div>
               </article>
 
+              <!-- Slide 3: After Hours -->
               <article class="project-slide">
-                <div class="project-visual visual-three">
-                  <span>Placeholder</span>
+                <div class="project-visual">
+                  <img
+                    src="assets/images/after-hours.jpg"
+                    alt="After Hours developer dark mode showcase UI"
+                    class="project-image"
+                    loading="lazy"
+                  />
+                  <div class="project-badge">Creative Sandbox</div>
                 </div>
                 <div class="project-copy">
+                  <div class="project-num">Project 03 / 04</div>
                   <h3>After Hours</h3>
                   <p>
-                    An experimental social space for side projects, notes, and
-                    playful product ideas built during late-night sessions.
+                    An atmospheric digital sanctuary for late-night experiments, interactive code sketches, ambient lofi audio players, and unconstrained software ideas.
                   </p>
+                  <div class="project-tags">
+                    <span>Experimental</span>
+                    <span>Audio &amp; Code</span>
+                    <span>Ambient UI</span>
+                    <span>Side Projects</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Slide 4: WAD2 Avicii Tribute DJ Deck -->
+              <article class="project-slide">
+                <div class="project-visual">
+                  <img
+                    src="https://media.gettyimages.com/id/102196740/photo/stadiumred-presents-dj-avicii.jpg?s=1024x1024&w=gi&k=20&c=LySXcmSpb_5zxffdIsK_X8ZHmrXxmdUjJy03kHCeGQY="
+                    alt="Avicii performing live - DJ tribute and interactive mixer"
+                    class="project-image"
+                    loading="lazy"
+                  />
+                  <div class="project-badge highlight">WAD2 Coursework</div>
+                </div>
+                <div class="project-copy">
+                  <div class="project-num">Project 04 / 04</div>
+                  <h3>Forever Avicii: Interactive DJ Deck</h3>
+                  <p>
+                    Coursework module for Web Application Development 2 featuring an interactive dual-deck turntable mixer, real-time Web Audio synthesis, VU meters, cue drops, and mashups.
+                  </p>
+                  <div class="project-tags">
+                    <span>WAD2 Assignment</span>
+                    <span>Web Audio API</span>
+                    <span>Interactive Turntables</span>
+                  </div>
+                  <div class="project-actions">
+                    <a href="fanpage/index.html" class="project-link" target="_blank" rel="noopener">
+                      Launch DJ Deck ↗
+                    </a>
+                  </div>
                 </div>
               </article>
             </div>
@@ -194,123 +313,175 @@
             <button
               class="dot is-active"
               type="button"
-              aria-label="Show project 1"
+              aria-label="Show project 1: Campus Connect"
             ></button>
             <button
               class="dot"
               type="button"
-              aria-label="Show project 2"
+              aria-label="Show project 2: Flux Studio"
             ></button>
             <button
               class="dot"
               type="button"
-              aria-label="Show project 3"
+              aria-label="Show project 3: After Hours"
+            ></button>
+            <button
+              class="dot"
+              type="button"
+              aria-label="Show project 4: Forever Avicii DJ Deck"
             ></button>
           </div>
         </div>
       </section>
 
+      <!-- Window: Hobbies -->
       <section
         class="window"
         id="hobbiesWindow"
-        aria-label="Hobbies and interests section"
+        aria-label="Hobbies and interests window"
       >
         <header class="titlebar">
-          <div class="titlebar-text">Hobbies - Alan Antony James</div>
-          <div class="window-controls" aria-label="window controls">
-            <button type="button" aria-label="minimize window">_</button>
-            <button type="button" aria-label="maximize window">□</button>
-            <button type="button" aria-label="close window">×</button>
+          <div class="titlebar-info">
+            <span class="titlebar-icon" aria-hidden="true"></span>
+            <span class="titlebar-text">Personal Interests - Alan Antony James</span>
+          </div>
+          <div class="window-controls" aria-label="Window controls">
+            <button type="button" class="win-btn win-min" data-action="minimize" aria-label="Minimize window">_</button>
+            <button type="button" class="win-btn win-max" data-action="maximize" aria-label="Maximize window">□</button>
+            <button type="button" class="win-btn win-close" data-action="close" aria-label="Close window">×</button>
           </div>
         </header>
 
         <div class="window-content hobbies-window-content">
           <div class="section-heading">
-            <p class="eyebrow">Life outside the screen</p>
-            <h2>Hobbies &amp; Interests</h2>
+            <h2>Hobbies &amp; Explorations</h2>
+            <p class="section-desc">What fuels creative energy and keeps perspectives fresh outside of coding.</p>
           </div>
 
           <div class="hobby-grid">
             <article class="hobby-card">
-              <span class="hobby-icon">✎</span>
-              <h3>Sketching</h3>
-              <p>
-                Quick character studies, concept doodles, and visual notes from
-                the week.
-              </p>
+              <span class="hobby-icon" aria-hidden="true">✎</span>
+              <div class="hobby-body">
+                <h3>Visual Sketching</h3>
+                <p>
+                  Quick thumbnail studies, UI wireframes, character doodles, and visual note-taking that ground digital concepts into physical ink.
+                </p>
+                <span class="hobby-tag">Analog Ideation</span>
+              </div>
             </article>
 
             <article class="hobby-card">
-              <span class="hobby-icon">☕</span>
-              <h3>Coffee &amp; Thinking</h3>
-              <p>
-                Slow mornings, brainstorms, and the kind of ideas that only
-                appear after a warm drink.
-              </p>
+              <span class="hobby-icon" aria-hidden="true">☕</span>
+              <div class="hobby-body">
+                <h3>Coffee &amp; Architecture</h3>
+                <p>
+                  Slow morning pour-overs paired with architectural deep dives, mapping complex software flows onto physical spatial concepts.
+                </p>
+                <span class="hobby-tag">Rituals &amp; Focus</span>
+              </div>
             </article>
 
             <article class="hobby-card">
-              <span class="hobby-icon">🎧</span>
-              <h3>Music</h3>
-              <p>
-                Lo-fi sessions, indie playlists, and soundtracks for deep work
-                and long walks.
-              </p>
+              <span class="hobby-icon" aria-hidden="true">🎧</span>
+              <div class="hobby-body">
+                <h3>Electronic &amp; Ambient Music</h3>
+                <p>
+                  Melodic house, lo-fi beats, and cinematic soundscapes for deep programming flows. Heavily inspired by artists like Avicii and Tycho.
+                </p>
+                <span class="hobby-tag">Audio Flow</span>
+              </div>
             </article>
 
             <article class="hobby-card">
-              <span class="hobby-icon">🚲</span>
-              <h3>Rides &amp; Walks</h3>
-              <p>
-                Resetting the headspace with movement, fresh air, and the
-                occasional detour.
-              </p>
+              <span class="hobby-icon" aria-hidden="true">🚲</span>
+              <div class="hobby-body">
+                <h3>City Rides &amp; Walks</h3>
+                <p>
+                  Clearing mental cache through urban cycling and evening walks across Singapore's cityscape, letting subconscious problems untangle.
+                </p>
+                <span class="hobby-tag">Headspace Reset</span>
+              </div>
             </article>
           </div>
         </div>
       </section>
 
+      <!-- Taskbar -->
       <footer class="taskbar" aria-label="Windows taskbar">
-        <button class="start-button" type="button" aria-label="Open start menu">
-          <span class="start-logo">◢</span>
-          <span>Start</span>
+        <button class="start-button" type="button" aria-label="Toggle start menu" aria-expanded="false">
+          <span class="start-flag" aria-hidden="true">
+            <span class="flag-red"></span>
+            <span class="flag-green"></span>
+            <span class="flag-blue"></span>
+            <span class="flag-yellow"></span>
+          </span>
+          <span class="start-text">Start</span>
         </button>
 
-        <div class="task-buttons" aria-label="Open windows">
+        <div class="task-buttons" aria-label="Open task windows">
           <button
             class="task-button is-active"
             data-window="homeWindow"
             type="button"
           >
-            Home
+            <span class="task-icon task-icon-home" aria-hidden="true"></span>
+            <span>Home</span>
           </button>
           <button
             class="task-button"
             data-window="projectsWindow"
             type="button"
           >
-            Projects
+            <span class="task-icon task-icon-proj" aria-hidden="true"></span>
+            <span>Projects</span>
           </button>
-          <button class="task-button" data-window="hobbiesWindow" type="button">
-            Hobbies
+          <button
+            class="task-button"
+            data-window="hobbiesWindow"
+            type="button"
+          >
+            <span class="task-icon task-icon-hobby" aria-hidden="true"></span>
+            <span>Hobbies</span>
           </button>
         </div>
 
-        <div class="system-tray">
+        <div class="system-tray" aria-label="System notification tray">
+          <span class="tray-icon" title="Sound: Active">🔊</span>
+          <span class="tray-icon" title="Network: Connected">🌐</span>
           <span class="tray-clock" id="clock">--:--</span>
         </div>
       </footer>
 
+      <!-- Start Menu -->
       <nav class="start-menu hidden" aria-label="Start menu">
-        <button class="menu-item" data-window="homeWindow" type="button">
-          Home
-        </button>
-        <button class="menu-item" data-window="projectsWindow" type="button">
-          Projects
-        </button>
-        <button class="menu-item" data-window="hobbiesWindow" type="button">
-          Hobbies
-        </button>
+        <div class="start-header">
+          <div class="start-user-avatar">AA</div>
+          <div class="start-user-name">Alan Antony James</div>
+        </div>
+        <div class="start-body">
+          <div class="start-col-left">
+            <button class="menu-item" data-window="homeWindow" type="button">
+              <span class="menu-icon">🏠</span>
+              <span>Home Overview</span>
+            </button>
+            <button class="menu-item" data-window="projectsWindow" type="button">
+              <span class="menu-icon">📁</span>
+              <span>Projects Portfolio</span>
+            </button>
+            <button class="menu-item" data-window="hobbiesWindow" type="button">
+              <span class="menu-icon">☕</span>
+              <span>Hobbies &amp; Life</span>
+            </button>
+            <div class="menu-separator"></div>
+            <a class="menu-item menu-link" href="fanpage/index.html" target="_blank" rel="noopener">
+              <span class="menu-icon">🎵</span>
+              <span>WAD2 Fanpage (DJ Deck) ↗</span>
+            </a>
+          </div>
+        </div>
+        <div class="start-footer">
+          <span class="logoff-label">Windows XP Portfolio Edition</span>
+        </div>
       </nav>
     </div>
 

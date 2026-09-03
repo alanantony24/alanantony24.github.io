@@ -1,70 +1,196 @@
+// ==========================================================================
+// Windows XP Luna Desktop Interactive System
+// ==========================================================================
+
 const desktopWindows = document.querySelectorAll(".window");
-const folderButtons = document.querySelectorAll(".folder-button");
+const folderButtons = document.querySelectorAll(".folder-button:not(.desktop-link)");
 const taskButtons = document.querySelectorAll(".task-button");
-const menuItems = document.querySelectorAll(".menu-item");
+const menuItems = document.querySelectorAll(".menu-item:not(.menu-link)");
 const dots = document.querySelectorAll(".dot");
 const slides = document.querySelectorAll(".project-slide");
 const startButton = document.querySelector(".start-button");
 const startMenu = document.querySelector(".start-menu");
 const bootScreen = document.getElementById("bootScreen");
 const clockEl = document.getElementById("clock");
+const winControls = document.querySelectorAll(".win-btn");
 
 let currentSlide = 0;
+let audioContextInstance = null;
 
-const openWindow = (targetId) => {
-  desktopWindows.forEach((windowEl) => {
-    const isActive = windowEl.id === targetId;
-    windowEl.classList.toggle("active", isActive);
-  });
-
-  folderButtons.forEach((button) => {
-    const isActive = button.dataset.window === targetId;
-    button.classList.toggle("active", isActive);
-  });
-
-  taskButtons.forEach((button) => {
-    const isActive = button.dataset.window === targetId;
-    button.classList.toggle("is-active", isActive);
-  });
-
-  startMenu.classList.add("hidden");
+// Helper to get or resume Web Audio Context safely
+const getAudioContext = () => {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return null;
+  if (!audioContextInstance) {
+    audioContextInstance = new AudioContextClass();
+  }
+  if (audioContextInstance.state === "suspended") {
+    audioContextInstance.resume().catch(() => {});
+  }
+  return audioContextInstance;
 };
 
-folderButtons.forEach((button) => {
-  button.addEventListener("click", () => {
+// Play realistic XP-like short click
+const playClickSound = () => {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  try {
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+
+    oscillator.type = "square";
+    oscillator.frequency.value = 720;
+    gainNode.gain.value = 0.0001;
+
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+
+    oscillator.start();
+    gainNode.gain.exponentialRampToValueAtTime(0.04, ctx.currentTime + 0.01);
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.06);
+    oscillator.stop(ctx.currentTime + 0.07);
+  } catch {
+    // Audio policies handled silently
+  }
+};
+
+// Play chord startup sound
+const playStartupSound = () => {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  try {
+    const notes = [392.0, 523.25, 659.25, 783.99]; // G4, C5, E5, G5 major chord
+
+    notes.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "triangle";
+      osc.frequency.value = freq;
+      gain.gain.value = 0.0001;
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      const startTime = ctx.currentTime + idx * 0.12;
+      osc.start(startTime);
+      gain.gain.exponentialRampToValueAtTime(0.09, startTime + 0.06);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.55);
+      osc.stop(startTime + 0.58);
+    });
+  } catch {
+    // Audio policies handled silently
+  }
+};
+
+// Window Management
+const openWindow = (targetId) => {
+  desktopWindows.forEach((win) => {
+    const isActive = win.id === targetId;
+    win.classList.toggle("active", isActive);
+    if (isActive) {
+      // Bring to top
+      win.style.zIndex = "15";
+    } else {
+      win.style.zIndex = "10";
+    }
+  });
+
+  folderButtons.forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.window === targetId);
+  });
+
+  taskButtons.forEach((btn) => {
+    btn.classList.toggle("is-active", btn.dataset.window === targetId);
+  });
+
+  if (startMenu) {
+    startMenu.classList.add("hidden");
+    if (startButton) startButton.setAttribute("aria-expanded", "false");
+  }
+};
+
+// Folder Button clicks
+folderButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
     playClickSound();
-    openWindow(button.dataset.window);
+    openWindow(btn.dataset.window);
   });
 });
 
-taskButtons.forEach((button) => {
-  button.addEventListener("click", () => {
+// Taskbar buttons (toggles minimize if active, opens if inactive)
+taskButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
     playClickSound();
-    openWindow(button.dataset.window);
+    const targetId = btn.dataset.window;
+    const win = document.getElementById(targetId);
+
+    if (win && win.classList.contains("active")) {
+      win.classList.remove("active");
+      btn.classList.remove("is-active");
+    } else {
+      openWindow(targetId);
+    }
   });
 });
 
-menuItems.forEach((button) => {
-  button.addEventListener("click", () => {
+// Start menu items
+menuItems.forEach((item) => {
+  item.addEventListener("click", () => {
     playClickSound();
-    openWindow(button.dataset.window);
+    openWindow(item.dataset.window);
   });
 });
 
-startButton.addEventListener("click", () => {
-  playClickSound();
-  startMenu.classList.toggle("hidden");
+// Start Button Toggle
+if (startButton && startMenu) {
+  startButton.addEventListener("click", (e) => {
+    e.stopPropagation();
+    playClickSound();
+    const isHidden = startMenu.classList.toggle("hidden");
+    startButton.setAttribute("aria-expanded", isHidden ? "false" : "true");
+  });
+}
+
+// Window Titlebar Controls (Minimize, Maximize, Close)
+winControls.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    playClickSound();
+    const action = btn.dataset.action;
+    const win = btn.closest(".window");
+    if (!win) return;
+
+    if (action === "minimize") {
+      win.classList.remove("active");
+      const taskBtn = document.querySelector(`.task-button[data-window="${win.id}"]`);
+      if (taskBtn) taskBtn.classList.remove("is-active");
+    } else if (action === "maximize") {
+      win.classList.toggle("is-maximized");
+    } else if (action === "close") {
+      win.classList.remove("active");
+      win.classList.remove("is-maximized");
+      const taskBtn = document.querySelector(`.task-button[data-window="${win.id}"]`);
+      if (taskBtn) taskBtn.classList.remove("is-active");
+      const folderBtn = document.querySelector(`.folder-button[data-window="${win.id}"]`);
+      if (folderBtn) folderBtn.classList.remove("active");
+    }
+  });
 });
 
+// Project Carousel Management
 const showSlide = (index) => {
+  if (!slides.length) return;
   currentSlide = (index + slides.length) % slides.length;
 
-  slides.forEach((slide, slideIndex) => {
-    slide.classList.toggle("is-active", slideIndex === currentSlide);
+  slides.forEach((slide, idx) => {
+    slide.classList.toggle("is-active", idx === currentSlide);
   });
 
-  dots.forEach((dot, dotIndex) => {
-    dot.classList.toggle("is-active", dotIndex === currentSlide);
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle("is-active", idx === currentSlide);
   });
 };
 
@@ -75,109 +201,71 @@ dots.forEach((dot, index) => {
   });
 });
 
-document.querySelector(".carousel-nav.prev").addEventListener("click", () => {
-  playClickSound();
-  showSlide(currentSlide - 1);
-});
+const prevBtn = document.querySelector(".carousel-nav.prev");
+const nextBtn = document.querySelector(".carousel-nav.next");
 
-document.querySelector(".carousel-nav.next").addEventListener("click", () => {
-  playClickSound();
-  showSlide(currentSlide + 1);
-});
+if (prevBtn) {
+  prevBtn.addEventListener("click", () => {
+    playClickSound();
+    showSlide(currentSlide - 1);
+  });
+}
 
+if (nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    playClickSound();
+    showSlide(currentSlide + 1);
+  });
+}
+
+// System Tray Clock
 const updateClock = () => {
+  if (!clockEl) return;
   const now = new Date();
-  const time = now.toLocaleTimeString([], {
+  clockEl.textContent = now.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
     hour12: true,
   });
-  clockEl.textContent = time;
 };
 
 updateClock();
-setInterval(updateClock, 30000);
+setInterval(updateClock, 10000);
 
-const playStartupSound = () => {
-  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContextClass) return;
-
-  const audioContext = new AudioContextClass();
-  const notes = [392, 523.25, 659.25];
-
-  notes.forEach((frequency, index) => {
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-
-    oscillator.type = "triangle";
-    oscillator.frequency.value = frequency;
-    gainNode.gain.value = 0.0001;
-
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-
-    oscillator.start(audioContext.currentTime + index * 0.14);
-    gainNode.gain.exponentialRampToValueAtTime(
-      0.12,
-      audioContext.currentTime + index * 0.14 + 0.05,
-    );
-    gainNode.gain.exponentialRampToValueAtTime(
-      0.0001,
-      audioContext.currentTime + index * 0.14 + 0.32,
-    );
-    oscillator.stop(audioContext.currentTime + index * 0.14 + 0.34);
-  });
-
-  setTimeout(() => {
-    bootScreen.classList.add("hidden");
-  }, 2100);
-};
-
-const playClickSound = () => {
-  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContextClass) return;
-
-  const audioContext = new AudioContextClass();
-  const oscillator = audioContext.createOscillator();
-  const gainNode = audioContext.createGain();
-
-  oscillator.type = "square";
-  oscillator.frequency.value = 680;
-  gainNode.gain.value = 0.0001;
-
-  oscillator.connect(gainNode);
-  gainNode.connect(audioContext.destination);
-
-  oscillator.start();
-  gainNode.gain.exponentialRampToValueAtTime(
-    0.05,
-    audioContext.currentTime + 0.01,
-  );
-  gainNode.gain.exponentialRampToValueAtTime(
-    0.0001,
-    audioContext.currentTime + 0.08,
-  );
-  oscillator.stop(audioContext.currentTime + 0.09);
-};
-
-window.addEventListener("load", () => {
-  showSlide(0);
-  playStartupSound();
-});
-
+// Close start menu when clicking outside
 document.addEventListener("click", (event) => {
-  const clickTarget = event.target;
-
-  if (!(clickTarget instanceof HTMLElement)) return;
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) return;
 
   if (
-    !clickTarget.closest(".folder-button") &&
-    !clickTarget.closest(".task-button") &&
-    !clickTarget.closest(".menu-item") &&
-    !clickTarget.closest(".start-button") &&
-    !clickTarget.closest(".dot") &&
-    !clickTarget.closest(".carousel-nav")
+    startMenu &&
+    !startMenu.classList.contains("hidden") &&
+    !target.closest(".start-menu") &&
+    !target.closest(".start-button")
   ) {
     startMenu.classList.add("hidden");
+    if (startButton) startButton.setAttribute("aria-expanded", "false");
   }
 });
+
+// Initialization & Boot sequence
+window.addEventListener("load", () => {
+  showSlide(0);
+
+  // Dismiss boot screen after progress animation
+  setTimeout(() => {
+    if (bootScreen) {
+      bootScreen.classList.add("hidden");
+    }
+  }, 1900);
+});
+
+// User-gesture audio unlock
+const unlockAudio = () => {
+  playStartupSound();
+  window.removeEventListener("pointerdown", unlockAudio);
+  window.removeEventListener("keydown", unlockAudio);
+};
+
+window.addEventListener("pointerdown", unlockAudio, { once: true });
+window.addEventListener("keydown", unlockAudio, { once: true });
