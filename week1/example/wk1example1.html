@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+    <head>
+        <title>HTML Tags</title>
+
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <style>
+            .fav {
+                color: red;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <nav>
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Sign In</a></li>
+                <li><a href="#">Sign Out</a></li>
+            </ul>
+        </nav>
+        <br><br><br><br><br>
+        Select a fruit:
+        <select name='fruit'>
+            <option value='orange'>Orange</option>
+            <option value='apple'>Apple</option>
+            <option value='peach' selected>Peach</option>
+        </select>
+
+        <div id="div1">
+            <p>This text belongs to division 1. This is about <span class="fav">my favorite fruits!</span></p>
+            <ol>
+                <li>orange</li>
+                <li>apple</li>
+                <li>peach</li>
+            </ol>
+                    
+        </div>
+
+        <div id="div2">
+            <p>This text belongs to division 2. This is about <span class="fav">my friend's favorite fruits!</span></p>
+            
+            <ul>
+                <li>apple</li>
+                <ul>
+                    <li>fuji</li>
+                    <li>honey crisp</li>
+                </ul>
+                <li>orange</li>
+            </ul>
+        </div>
+
+        <div id="div3">
+            <form>
+                Color input: <input type="color" value="green"><br>
+                Date input: <input type="date"><br>
+                Email input: <input type="email"><br>
+                File input: <input type="file"><br>
+                Number input: <input type="number" min="10" max="30" value="20" ><br>
+                Range Input: <input type="range" min="10" max="50" value="10" ><br>
+                Search input: <input type="search"><br>
+                Tel input: <input type="tel"><br>
+                Time input: <input type="time"><br>
+                Url input: <input type="url"><br>
+                <input type="submit">
+            </form>
+        </div>
+   
+       
+    </body>
+    
+</html>
